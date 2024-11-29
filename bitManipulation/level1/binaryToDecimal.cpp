@@ -7,13 +7,13 @@ int binaryToDecimal(string binary){
         if(binary[i]=='1'){
             num = num + p2;
         }
-        p2 = p2*2;
+        p2=p2<<1;
     }
     return num;
 }
 
 int main(){
-    string s ="11110";
+    string s ="11111";
     cout<<binaryToDecimal(s);
     return 0;
 }
