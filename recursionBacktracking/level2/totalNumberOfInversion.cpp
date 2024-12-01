@@ -2,11 +2,11 @@
 #include<vector>
 using namespace std;
 
-int ans = 0;
-void merge(vector<int>&arr,int low,int mid, int high){
+int merge(vector<int>&arr,int low,int mid, int high){
     vector<int>temp;
     int left = low;
     int right = mid + 1;
+    int ans = 0;
     while(left<=mid and right<=high){
         if(arr[left]<=arr[right]){
             temp.push_back(arr[left]);
@@ -29,19 +29,21 @@ void merge(vector<int>&arr,int low,int mid, int high){
     for(int i=low;i<=high;i++){
         arr[i] = temp[i-low];
     }
+    return ans;
 }
 
-void mergeSort(vector<int>&arr,int low,int high){
-    if(low>=high) return;
+int  mergeSort(vector<int>&arr,int low,int high){
+    int ans = 0;
+    if(low>=high) return ans;
     int mid = (low+high)/2;
-    mergeSort(arr,low,mid);
-    mergeSort(arr,mid+1,high);
-    merge(arr,low,mid,high);
+    ans += mergeSort(arr,low,mid);
+    ans += mergeSort(arr,mid+1,high);
+    ans += merge(arr,low,mid,high);
+    return ans;
 }
 int main(){
     vector<int> arr = {4,3,2,1};
     int n = arr.size();
-    mergeSort(arr,0,n-1);
-    cout<<ans;
+    cout<<mergeSort(arr,0,n-1);
     return 0;
 }
